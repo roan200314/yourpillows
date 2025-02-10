@@ -1,8 +1,7 @@
-C:\yourpillows\pillow-api\src\main\java\src\main\java\com\DTO\UserDTO.java
-C:\yourpillows\pillow-api\src\main\java\src\main\java\com\Service\UserService.java
-C:\yourpillows\pillow-api\src\main\java\src\main\java\com\DTO\ProductDTO.java
-C:\yourpillows\pillow-api\src\main\java\src\main\java\com\Controller\UserController.java
-C:\yourpillows\pillow-api\src\main\java\src\main\java\com\Repository\UserRepository.java
-C:\yourpillows\pillow-api\src\main\java\src\main\java\com\Mapper\UserMapper.java
-C:\yourpillows\pillow-api\src\main\java\src\main\java\com\yourpillows\App.java
-C:\yourpillows\pillow-api\src\main\java\src\test\java\com\yourpillows\AppTest.java
+C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Repository\UserRepository.java
+C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Application.java
+C:\yourpillows\pillow-api\src\main\java\com\yourpillows\DTO\ProductDTO.java
+C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Mapper\UserMapper.java
+C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Services\UserService.java
+C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Controllers\UserController.java
+C:\yourpillows\pillow-api\src\main\java\com\yourpillows\DTO\UserDTO.java

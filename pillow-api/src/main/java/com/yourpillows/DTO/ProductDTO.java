@@ -1,4 +1,4 @@
-package main.java.src.main.java.com.DTO;
+package com.yourpillows.DTO;
 
 import java.math.BigDecimal;
 

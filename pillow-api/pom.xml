@@ -56,6 +56,15 @@
           <scope>provided</scope>
       </dependency>
 
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.33</version>  <!-- Ensure latest stable version -->
+    <scope>runtime</scope>
+</dependency>
+
+
+
       <!-- JUnit -->
       <dependency>
           <groupId>junit</groupId>

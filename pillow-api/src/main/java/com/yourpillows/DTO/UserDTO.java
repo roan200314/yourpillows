@@ -1,4 +1,4 @@
-package main.java.src.main.java.com.DTO;
+package com.yourpillows.DTO;
 
 public class UserDTO {
     private int id;
