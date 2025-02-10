@@ -35,7 +35,7 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- List of annotated entity classes -->
-        <mapping class="com.elections.electionsapi.models.User"/>
+        <mapping class="com.yourpillows.Models.User"/>
         <!-- Add more entity mappings as needed -->
 
     </session-factory>

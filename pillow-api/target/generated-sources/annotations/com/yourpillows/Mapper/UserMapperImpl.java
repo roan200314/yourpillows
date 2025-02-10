@@ -1,51 +1,48 @@
 package com.yourpillows.Mapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.yourpillows.DTO.UserDTO;
+import com.yourpillows.Models.User;
 import javax.annotation.processing.Generated;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-10T22:14:57+0100",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Eclipse Adoptium)"
+    date = "2025-02-10T23:26:10+0100",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.2 (Oracle Corporation)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
 
     @Override
-    public SecurityProperties.User toDto(SecurityProperties.User user) {
+    public UserDTO toDto(User user) {
         if ( user == null ) {
             return null;
         }
 
-        SecurityProperties.User user1 = new SecurityProperties.User();
+        UserDTO userDTO = new UserDTO();
 
-        user1.setName( user.getName() );
-        user1.setPassword( user.getPassword() );
-        List<String> list = user.getRoles();
-        if ( list != null ) {
-            user1.setRoles( new ArrayList<String>( list ) );
-        }
+        userDTO.setId( user.getId() );
+        userDTO.setName( user.getName() );
+        userDTO.setEmail( user.getEmail() );
+        userDTO.setPassword( user.getPassword() );
+        userDTO.setCreatedAt( user.getCreatedAt() );
 
-        return user1;
+        return userDTO;
     }
 
     @Override
-    public SecurityProperties.User toEntity(SecurityProperties.User userDto) {
+    public User toEntity(UserDTO userDto) {
         if ( userDto == null ) {
             return null;
         }
 
-        SecurityProperties.User user = new SecurityProperties.User();
+        User user = new User();
 
-        user.setName( userDto.getName() );
         user.setPassword( userDto.getPassword() );
-        List<String> list = userDto.getRoles();
-        if ( list != null ) {
-            user.setRoles( new ArrayList<String>( list ) );
-        }
+        user.setName( userDto.getName() );
+        user.setEmail( userDto.getEmail() );
+
+        user.setCreatedAt( java.time.LocalDateTime.now() );
 
         return user;
     }
