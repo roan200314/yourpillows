@@ -1,3 +1,5 @@
+package main.java.src.main.java.com.DTO;
+
 import java.math.BigDecimal;
 
 public class ProductDTO {

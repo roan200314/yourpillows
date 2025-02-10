@@ -1,3 +1,5 @@
+package main.java.src.main.java.com.DTO;
+
 public class UserDTO {
     private int id;
     private String name;
