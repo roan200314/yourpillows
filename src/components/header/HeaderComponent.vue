@@ -1,0 +1,27 @@
+<template>
+    <header class="bg-white shadow-md py-4">
+      <div class="container mx-auto flex justify-between items-center px-6">
+        <h1 class="text-2xl font-bold text-gray-800">YourPillows</h1>
+        <nav>
+          <ul class="flex space-x-6">
+            <li><a href="#shop" class="text-gray-600 hover:text-gray-900 transition duration-300">Shop</a></li>
+            <li><a href="#contact" class="text-gray-600 hover:text-gray-900 transition duration-300">Contact</a></li>
+            <li><a href="#about" class="text-gray-600 hover:text-gray-900 transition duration-300">Over ons</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  </template>
+  
+  <script>
+  export default {
+    name: "HeaderComponent"
+  };
+  </script>
+  
+  <style>
+  nav ul {
+    list-style: none;
+  }
+  </style>
+  
