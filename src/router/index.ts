@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePageComponent from '@/components/PillowHomepage.vue';
+import HomePageComponent from '@/views/PillowHomepage.vue';
+import RegisterPage from '@/views/RegisterPage.vue';
 
 
 const routes = [
@@ -7,6 +8,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: HomePageComponent
+  },
+  {
+    path: '/Registreren',
+    name: 'Registreren',
+    component: RegisterPage
   },
 ];
 
