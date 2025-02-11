@@ -17,7 +17,7 @@ export function useRegister() {
         }
 
         try {
-            const response = await apiClient.post("/api/register", { // 👈 Base URL is handled by apiClient.js
+            const response = await apiClient.post("/api/register", {
                 name: name.value,
                 email: email.value,
                 password: password.value,
