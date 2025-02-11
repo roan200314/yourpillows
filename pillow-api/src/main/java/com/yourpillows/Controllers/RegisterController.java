@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/api")
 public class RegisterController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/register")
     public String register(@Valid @RequestBody UserDTO userDto) {
         return userService.registerUser(userDto);
     }
