@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-gray-800 text-white text-center py-6">
+    <footer class="bg-[#A3C7D6] text-white text-center py-6">
       <p>&copy; 2025 Luxury Comfort Pillows. All rights reserved.</p>
     </footer>
   </template>

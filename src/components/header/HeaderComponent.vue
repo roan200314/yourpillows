@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-white shadow-md py-4">
+    <header class=" bg-[#A3C7D6] shadow-md py-4">
       <div class="container mx-auto flex justify-between items-center px-6">
         <router-link :to="`/`" class="text-2xl font-bold text-gray-800">YourPillows</router-link>
         <nav>

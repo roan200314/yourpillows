@@ -36,6 +36,7 @@
 
         <!-- List of annotated entity classes -->
         <mapping class="com.yourpillows.Models.User"/>
+        <mapping class="com.yourpillows.Models.Product"/>
         <!-- Add more entity mappings as needed -->
 
     </session-factory>
