@@ -3,6 +3,7 @@ import HomePageComponent from '@/views/PillowHomepage.vue';
 import RegisterPage from '@/views/RegisterPage.vue';
 import LoginPage from "@/views/LoginPage.vue";
 import ShopPage from "@/views/shopPage.vue"
+import ProductPage from "../views/ProductPage.vue";
 
 
 const routes = [
@@ -26,6 +27,11 @@ const routes = [
     name: 'Login',
     component: LoginPage
   },
+  {
+    path: '/Product/:id',
+    name: 'Product',
+    component: ProductPage
+  }
 ];
 
 const router = createRouter({

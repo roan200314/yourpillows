@@ -29,8 +29,24 @@ public class Product {
     private BigDecimal price;
 
     @Column(nullable = false)
-    private int stockQuantity;
+    private String category; // Example values: "customizable", "neckpillow", "airplane"
 
     @Column(nullable = false)
+    private int stockQuantity;
+
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(nullable = false)
+    private String imageUrl;
+
+    // ✅ Add a constructor that matches DataLoader
+    public Product(String name, String description, BigDecimal price, int stockQuantity, String imageUrl) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.imageUrl = imageUrl;
+        this.createdAt = LocalDateTime.now();
+    }
 }

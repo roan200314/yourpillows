@@ -1,9 +1,13 @@
 import axios from "axios";
 
-console.log("VUE_APP_API_BASE_URL:", process.env.VUE_APP_API_BASE_URL);
+const baseURL = process.env.VUE_APP_API_BASE_URL || "http://localhost:8080";
+
+
+console.log("Base API URL:", baseURL); // ✅ Debugging: Check if it's correctly loaded
 
 const apiClient = axios.create({
-    baseURL: process.env.VUE_APP_API_BASE_URL || "http://localhost:8080",
+    baseURL: baseURL,
+    withCredentials: true, // ✅ Allows authentication cookies
     headers: {
         "Content-Type": "application/json",
     },

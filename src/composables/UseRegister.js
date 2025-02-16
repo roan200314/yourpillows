@@ -20,7 +20,7 @@ export function useRegister() {
             const response = await apiClient.post("/api/register", {
                 name: name.value,
                 email: email.value,
-                password: password.value,
+                password_hash: password.value,
             });
 
             alert(response.data || "Registratie succesvol!");
