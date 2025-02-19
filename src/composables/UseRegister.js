@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import apiClient from "@/api/apiClient"; // 👈 Import the centralized API client
+import apiClient from "../api/apiClient"; // 👈 Import the centralized API client
 import { useRouter } from "vue-router";
 
 export function useRegister() {

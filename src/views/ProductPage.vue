@@ -1,7 +1,7 @@
 <script setup>
-import { GetProduct } from '@/composables/GetProduct';
+import { GetProduct } from '../composables/GetProduct';
 import { ref } from 'vue';
-import ProductSpecifications from '@/components/ProductSpecifications.vue';
+import ProductSpecifications from '../components/ProductSpecifications.vue';
 
 const { product } = GetProduct();
 

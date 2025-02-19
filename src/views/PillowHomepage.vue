@@ -8,9 +8,7 @@
           <h2 class="text-4xl font-semibold drop-shadow-lg">Waarom YourPillows?</h2>
           <p class="mt-2 text-lg">Omdat jij het perfecte kussen verdient. Kies je stof, pas de dikte aan en geniet van luxe comfort – helemaal gepersonaliseerd voor jou.</p>
           <router-link
-              v-for="product in products"
-              :key="product.id"
-              :to="`/product/${product.id}`"
+              to="/product/4"
               class="mt-4 bg-[#D4A373] text-white px-6 py-3 rounded-lg hover:bg-[#B88657] transition duration-300">
             Personaliseer je kussen
             </router-link>
@@ -59,7 +57,7 @@
 </template>
 
 <script setup>
-import { useProducts } from '@/composables/UseProducts';
+import { useProducts } from '../composables/UseProducts';
 
 const { products } = useProducts();
 

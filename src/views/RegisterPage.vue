@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { useRegister } from "@/composables/UseRegister";
+import { useRegister } from "../composables/UseRegister";
 
 const { name, email, password, confirmPassword, errorMessage, register } = useRegister();
 </script>

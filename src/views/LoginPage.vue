@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { useLogin } from "@/composables/UseLogin";
+import { useLogin } from '../composables/UseLogin';
 
 const { email, password, errorMessage, login } = useLogin();
 </script>

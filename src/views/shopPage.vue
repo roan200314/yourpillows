@@ -53,14 +53,18 @@
 </template>
 
 <script setup>
-import { useProducts } from '@/composables/UseProducts';
+import { useProducts } from '../composables/UseProducts';
 
 const { products } = useProducts();
 
 const getImageUrl = (imagePath) => {
-  if (!imagePath) return '../assets/images/default-placeholder.png';
-  return `${process.env.VUE_APP_API_BASE_URL}${imagePath}`;
+  if (!imagePath) return new URL('../assets/images/Quiz_foto.png', import.meta.url).href;
+  return new URL(`../assets/images/${imagePath}`, import.meta.url).href;
 };
+
+
+
+
 </script>
 
 

@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import apiClient from "@/api/apiClient";
+import apiClient from "../api/apiClient";
 import { useRouter } from "vue-router";
 
 export function useLogin() {

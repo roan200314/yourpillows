@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./pillow-api
+    container_name: yourpillows-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/yourpillows?serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - yourpillows-network
+
+  frontend:
+    build: ./src
+    container_name: yourpillows-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - yourpillows-network
+
+  db:
+    image: mysql:8.0
+    container_name: yourpillows-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: yourpillows
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - yourpillows-network
+
+networks:
+  yourpillows-network:
+    driver: bridge

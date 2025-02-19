@@ -1,6 +1,6 @@
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import apiClient from '@/api/apiClient';
+import apiClient from '../api/apiClient';
 
 export function GetProduct() {
     const route = useRoute();

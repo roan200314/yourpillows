@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue';
-import apiClient from "@/api/apiClient";
+import apiClient from "../api/apiClient";
 
 export function useProducts() {
     const products = ref([]);
