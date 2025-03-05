@@ -4,7 +4,6 @@ com\yourpillows\Services\UserService.class
 com\yourpillows\Application.class
 com\yourpillows\Models\Product.class
 com\yourpillows\Controllers\ProductController.class
-com\yourpillows\Controllers\ImageUploadController.class
 com\yourpillows\DTO\UserDTO.class
 com\yourpillows\Services\ProductService.class
 com\yourpillows\DTO\ProductDTO.class

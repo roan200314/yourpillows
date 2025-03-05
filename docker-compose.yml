@@ -1,11 +1,11 @@
-version: "3.8"
+version: '3.8'
 
 services:
   backend:
     build: ./pillow-api
     container_name: yourpillows-backend
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://yourpillows-db:3307/yourpillows
+      - SPRING_DATASOURCE_URL=jdbc:mysql://yourpillows-db:3306/yourpillows
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=${MYSQL_ROOT_PASSWORD}
     depends_on:
@@ -24,12 +24,11 @@ services:
     networks:
       - yourpillows-network
 
-  db:
+  db:  # <<< Dit moet binnen 'services:' staan!
     image: mysql:8.0
     container_name: yourpillows-db
-    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: Roan1972!
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: yourpillows
     ports:
       - "3307:3306"
