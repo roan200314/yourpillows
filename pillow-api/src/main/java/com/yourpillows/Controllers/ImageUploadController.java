@@ -65,16 +65,18 @@ public class ImageUploadController {
     @GetMapping("/uploads/{filename}")
     public ResponseEntity<byte[]> getImage(@PathVariable String filename) {
         try {
-            logger.info("Fetching image: {}", filename); // Log the image fetch attempt
-            Path imagePath = Paths.get(uploadDirectory, filename);
+            logger.info("Fetching image: {}", filename);
+            Path imagePath = Paths.get(uploadDirectory, filename); // Use the relative path
             byte[] imageBytes = Files.readAllBytes(imagePath);
             return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG) // ✅ Ensure correct content type
+                    .contentType(MediaType.IMAGE_JPEG) // Ensure the correct content type
                     .body(imageBytes);
         } catch (IOException e) {
-            logger.error("Error fetching image: {}", filename, e); // Log error if image fetch fails
+            logger.error("Error fetching image: {}", filename, e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+
 
 }
