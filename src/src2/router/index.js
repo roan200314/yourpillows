@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePageComponent from '../views/PillowHomepage.vue';
 import RegisterPage from '../views/RegisterPage.vue';
 import LoginPage from "../views/LoginPage.vue";
-import ShopPage from "../views/shopPage.vue"
+import ShopPage from "../views/ShopPage.vue"
 import ProductPage from "../views/ProductPage.vue";
+import CartPage from "../views/CartPage.vue";
 
 
 
@@ -32,6 +33,11 @@ const routes = [
     path: '/Product/:id',
     name: 'Product',
     component: ProductPage
+  },
+  {
+    path: '/Winkelwagen',
+    name: 'Winkelwagen',
+    component: CartPage
   }
 ];
 

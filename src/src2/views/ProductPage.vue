@@ -1,9 +1,27 @@
 <template>
   <div v-if="product" class="bg-[#E5D9CF] min-h-screen font-sans p-4">
 
+
+    <!-- Cart Modal -->
+    <div v-if="cartVisible" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+      <div class="bg-white p-6 rounded-lg w-96">
+        <h3 class="text-xl font-semibold text-gray-800">Your Cart</h3>
+        <div v-if="cart.length === 0" class="mt-4 text-gray-500">Your cart is empty.</div>
+        <div v-else class="mt-4 space-y-4">
+          <div v-for="(item, index) in cart" :key="index" class="flex justify-between items-center">
+            <span class="text-gray-800">{{ item.name }} x{{ item.quantity }}</span>
+            <button @click="removeFromCart(item)" class="text-red-500">Remove</button>
+          </div>
+          <div class="mt-4 text-gray-800 font-bold">
+            Total: €{{ totalPrice.toFixed(2) }}
+          </div>
+        </div>
+        <button @click="toggleCart" class="mt-4 w-full bg-[#A3C7D6] text-white px-4 py-2 rounded-lg hover:bg-[#89A5B6] transition duration-300">Close</button>
+      </div>
+    </div>
+
     <!-- Product Container -->
     <div class="max-w-5xl mx-auto bg-white p-6 shadow-lg rounded-lg flex flex-col lg:flex-row gap-8">
-
       <!-- Product Image -->
       <div class="w-full lg:w-1/2 flex flex-col items-center">
         <img :src="getImageUrl(product.imageUrl)" alt="Product Image" class="rounded-lg shadow-md w-full h-auto object-cover" />
@@ -49,7 +67,7 @@
           <p class="text-gray-700 font-semibold mt-4">Kies de inhoud van je kussen</p>
           <div class="flex flex-wrap gap-2 mt-2">
             <button
-                v-for="filling in ['Microfiberfiber', 'Memory foam', 'Allebei']"
+                v-for="filling in ['Microfiber', 'Memory foam', 'Allebei']"
                 :key="filling"
                 @click="selectedFilling = filling"
                 class="px-3 py-1 border rounded-lg text-sm md:text-base"
@@ -66,9 +84,13 @@
         </p>
 
         <!-- "Add to Cart" Button -->
-        <button class="mt-6 w-full bg-[#A3C7D6] text-white px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-[#89A5B6] transition duration-300 text-sm md:text-base">
+        <button
+            v-if="selectedFirstSide && selectedSecondSide && selectedFilling"
+            @click="addToCart(product)"
+            class="mt-6 w-full bg-[#A3C7D6] text-white px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-[#89A5B6] transition duration-300 text-sm md:text-base">
           In winkelwagen
         </button>
+        <p v-else class="mt-2 text-red-500 text-sm">Selecteer alle opties om toe te voegen aan winkelwagen.</p>
       </div>
     </div>
 
@@ -95,11 +117,15 @@
 </template>
 
 <script setup>
-import { GetProduct } from '../composables/GetProduct';
 import { ref } from 'vue';
+import { useCart } from '../composables/useCart';
 import ProductSpecifications from '../components/ProductSpecifications.vue';
+import { GetProduct } from '../composables/GetProduct';
+import { useProductDetails } from '../composables/useProductDetails';
 
 const { product } = GetProduct();
+const { extraDescription, customerReviews, specifications } = useProductDetails();
+const { cart, addToCart, removeFromCart, totalPrice } = useCart();
 
 const getImageUrl = (imagePath) => {
   if (!imagePath) return '../assets/images/default-placeholder.png';
@@ -109,21 +135,9 @@ const getImageUrl = (imagePath) => {
 const selectedFirstSide = ref('');
 const selectedSecondSide = ref('');
 const selectedFilling = ref('');
+const cartVisible = ref(false);
 
-const extraDescription = ref(
-    "Dit kussen is speciaal ontworpen voor maximaal comfort tijdens lange reizen. Het past zich aan je nek aan en biedt ultieme ondersteuning, zodat je uitgerust aankomt op je bestemming."
-);
-
-const customerReviews = ref([
-  {name: "Lisa M.", rating: "⭐️⭐️⭐️⭐️⭐️", text: "Super comfortabel! Mijn nek voelde ontspannen na een lange vlucht."},
-  {name: "Tom D.", rating: "⭐️⭐️⭐️⭐️", text: "Goede kwaliteit, maar had iets steviger mogen zijn voor mij."},
-  {name: "Eva K.", rating: "⭐️⭐️⭐️⭐️⭐️", text: "Beste nekkussen dat ik ooit heb gehad!"}
-]);
-
-const specifications = ref([
-  {title: "Formaat en gewicht", content: "Afmetingen: 50x70 cm, Gewicht: 800g"},
-  {title: "Technische specificaties", content: "100% memory foam, Hypoallergeen, Ademend materiaal"},
-  {title: "Wasvoorschriften", content: "Hoes: Machinewasbaar op 30°C, Kussen: Alleen handwas"},
-  {title: "Wat zit er in de doos?", content: "1x Nekkussen, 1x Opbergzak, Handleiding"}
-]);
+const toggleCart = () => {
+  cartVisible.value = !cartVisible.value;
+};
 </script>
