@@ -2,10 +2,18 @@ import { defineStore } from "pinia";
 
 export const useCartStore = defineStore("cart", {
     state: () => ({
-        cart: JSON.parse(localStorage.getItem("cart")) || [],
+        cart: [], // Initialize empty cart
     }),
 
     actions: {
+        // Action to load cart from localStorage on first load
+        loadCart() {
+            const savedCart = JSON.parse(localStorage.getItem("cart"));
+            if (savedCart && Array.isArray(savedCart)) {
+                this.cart = savedCart;
+            }
+        },
+
         addToCart(item) {
             const existingItem = this.cart.find((cartItem) => cartItem.id === item.id);
             if (existingItem) {
@@ -37,5 +45,9 @@ export const useCartStore = defineStore("cart", {
     getters: {
         totalPrice: (state) =>
             state.cart.reduce((total, item) => total + item.price * item.quantity, 0),
+        totalQuantity: (state) =>
+            state.cart.reduce((total, item) => total + item.quantity, 0),
     },
 });
+
+// You can then call `loadCart()` when initializing the store to load the saved cart

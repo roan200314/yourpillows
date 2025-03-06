@@ -1,7 +1,6 @@
 <template>
   <div v-if="product" class="bg-[#E5D9CF] min-h-screen font-sans p-4">
 
-
     <!-- Cart Modal -->
     <div v-if="cartVisible" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
       <div class="bg-white p-6 rounded-lg w-96">
@@ -85,12 +84,20 @@
 
         <!-- "Add to Cart" Button -->
         <button
-            v-if="selectedFirstSide && selectedSecondSide && selectedFilling"
             @click="addToCart(product)"
-            class="mt-6 w-full bg-[#A3C7D6] text-white px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-[#89A5B6] transition duration-300 text-sm md:text-base">
+            class="mt-6 w-full bg-[#A3C7D6] text-white px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-[#89A5B6] transition duration-300 text-sm md:text-base"
+            :disabled="product.category === 'customizable' && !(selectedFirstSide && selectedSecondSide && selectedFilling)">
           In winkelwagen
         </button>
-        <p v-else class="mt-2 text-red-500 text-sm">Selecteer alle opties om toe te voegen aan winkelwagen.</p>
+
+        <!-- Message for customizable products -->
+        <p v-if="product.category === 'customizable' && !(selectedFirstSide && selectedSecondSide && selectedFilling)" class="mt-2 text-red-500 text-sm">
+          Selecteer alle opties om toe te voegen aan winkelwagen.
+        </p>
+
+
+        <!-- Only show this message if the product is customizable -->
+        <p v-if="product.category === 'customizable'" class="mt-2 text-red-500 text-sm">Selecteer alle opties om toe te voegen aan winkelwagen.</p>
       </div>
     </div>
 
@@ -118,7 +125,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useCart } from '../composables/useCart';
+import { useCart } from '../composables/UseCart';
 import ProductSpecifications from '../components/ProductSpecifications.vue';
 import { GetProduct } from '../composables/GetProduct';
 import { useProductDetails } from '../composables/useProductDetails';
