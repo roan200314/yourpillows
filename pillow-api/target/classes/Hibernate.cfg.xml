@@ -1,43 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-<hibernate-configuration>
-    <session-factory>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE hibernate-configuration PUBLIC-->
+<!--        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"-->
+<!--        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">-->
+<!--<hibernate-configuration>-->
+<!--    <session-factory>-->
 
-        <!-- Database connection settings -->
-        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/yourpillow-db</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">Roan1972!</property>
+<!--        &lt;!&ndash; Database connection settings &ndash;&gt;-->
+<!--        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>-->
+<!--        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/yourpillow-db</property>-->
+<!--        <property name="hibernate.connection.username">root</property>-->
+<!--        <property name="hibernate.connection.password">Roan1972!</property>-->
 
-        <!-- JDBC connection pool settings -->
-        <property name="hibernate.c3p0.min_size">5</property>
-        <property name="hibernate.c3p0.max_size">20</property>
-        <property name="hibernate.c3p0.timeout">300</property>
-        <property name="hibernate.c3p0.max_statements">50</property>
-        <property name="hibernate.c3p0.idle_test_period">3000</property>
+<!--        &lt;!&ndash; JDBC connection pool settings &ndash;&gt;-->
+<!--        <property name="hibernate.c3p0.min_size">5</property>-->
+<!--        <property name="hibernate.c3p0.max_size">20</property>-->
+<!--        <property name="hibernate.c3p0.timeout">300</property>-->
+<!--        <property name="hibernate.c3p0.max_statements">50</property>-->
+<!--        <property name="hibernate.c3p0.idle_test_period">3000</property>-->
 
 
-        <!-- Dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+<!--        &lt;!&ndash; Dialect &ndash;&gt;-->
+<!--        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
 
-        <!-- Enable Hibernate's automatic session context management -->
-        <property name="hibernate.current_session_context_class">thread</property>
+<!--        &lt;!&ndash; Enable Hibernate's automatic session context management &ndash;&gt;-->
+<!--        <property name="hibernate.current_session_context_class">thread</property>-->
 
-        <!-- Echo all executed SQL to stdout -->
-        <property name="hibernate.show_sql">true</property>
+<!--        &lt;!&ndash; Echo all executed SQL to stdout &ndash;&gt;-->
+<!--        <property name="hibernate.show_sql">true</property>-->
 
-        <!-- Format SQL output -->
-        <property name="hibernate.format_sql">true</property>
+<!--        &lt;!&ndash; Format SQL output &ndash;&gt;-->
+<!--        <property name="hibernate.format_sql">true</property>-->
 
-        <!-- Drop and re-create the database schema on startup (only for development) -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+<!--        &lt;!&ndash; Drop and re-create the database schema on startup (only for development) &ndash;&gt;-->
+<!--        <property name="hibernate.hbm2ddl.auto">update</property>-->
 
-        <!-- List of annotated entity classes -->
-        <mapping class="com.yourpillows.Models.User"/>
-        <mapping class="com.yourpillows.Models.Product"/>
-        <!-- Add more entity mappings as needed -->
+<!--        &lt;!&ndash; List of annotated entity classes &ndash;&gt;-->
+<!--        <mapping class="com.yourpillows.Models.User"/>-->
+<!--        <mapping class="com.yourpillows.Models.Product"/>-->
+<!--        &lt;!&ndash; Add more entity mappings as needed &ndash;&gt;-->
 
-    </session-factory>
-</hibernate-configuration>
+<!--    </session-factory>-->
+<!--</hibernate-configuration>-->
