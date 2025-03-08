@@ -50,9 +50,9 @@
   <!-- Cart Modal Pop-up -->
   <div v-if="cartVisible" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
     <div class="bg-white p-6 rounded-lg w-96 max-w-lg">
-      <h3 class="text-xl font-semibold text-gray-800 mb-4">Your Cart</h3>
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Jouw winkelwagen</h3>
 
-      <div v-if="cart.length === 0" class="mt-4 text-gray-500">Your cart is empty.</div>
+      <div v-if="cart.length === 0" class="mt-4 text-gray-500">Uw winkelwagen is leeg</div>
 
       <div v-else>
         <div class="space-y-4">
@@ -62,17 +62,23 @@
               <span class="text-gray-800">{{ item.name }} x{{ item.quantity }}</span>
             </div>
             <span class="text-gray-800 font-bold">€{{ (item.price * item.quantity).toFixed(2) }}</span>
-            <button @click="removeFromCart(item)" class="text-red-500 hover:text-red-700 text-sm">Remove</button>
+            <button @click="removeFromCart(item)" class="text-red-500 hover:text-red-700 text-sm">Verwijder</button>
           </div>
         </div>
 
         <div class="mt-4 text-gray-800 font-bold">
-          Total: €{{ totalPrice.toFixed(2) }}
+          Totaal: €{{ totalPrice.toFixed(2) }}
         </div>
 
         <div class="flex space-x-4 mt-4">
-          <button @click="toggleCart" class="w-full bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Close</button>
-          <button class="w-full bg-[#A3C7D6] text-white px-4 py-2 rounded-lg hover:bg-[#89A5B6]">Proceed to Checkout</button>
+          <button @click="toggleCart" class="w-full bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Sluit</button>
+          <router-link @click="toggleCart"
+              to="/Checkout"
+              class="w-full bg-[#A3C7D6] text-white px-4 py-2 rounded-lg hover:bg-[#89A5B6] flex justify-center"
+          >
+            Naar afrekenen
+          </router-link>
+
         </div>
       </div>
     </div>
@@ -81,6 +87,7 @@
 
 <script>
 import { useCartStore } from "../stores/cart"; // Import the store
+
 
 export default {
   name: "HeaderComponent",

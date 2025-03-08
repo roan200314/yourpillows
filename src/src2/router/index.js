@@ -35,8 +35,8 @@ const routes = [
     component: ProductPage
   },
   {
-    path: '/Winkelwagen',
-    name: 'Winkelwagen',
+    path: '/Checkout',
+    name: 'Checkout',
     component: CartPage
   }
 ];
