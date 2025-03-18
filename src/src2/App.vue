@@ -9,7 +9,6 @@
 <script>
 import HeaderComponent from "./components/HeaderComponent.vue";
 import FooterComponent from "./components/FooterComponent.vue";
-import {useCartStore} from './stores/cart';
 
 export default {
   name: "App",
@@ -17,10 +16,6 @@ export default {
     HeaderComponent,
     FooterComponent,
   },
-  mounted() {
-    const cartStore = useCartStore();  // Initialize the cart store
-    cartStore.loadCart();  // Call loadCart to load the cart from localStorage
-  }
 };
 </script>
 

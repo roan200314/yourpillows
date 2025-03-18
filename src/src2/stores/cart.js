@@ -1,75 +1,82 @@
 import { defineStore } from "pinia";
 
+// Pinia store - cart.js
+
 export const useCartStore = defineStore("cart", {
     state: () => ({
-        cart: [], // Initialize empty cart
+        cart: [],
     }),
 
     actions: {
-        // Load the cart from localStorage if it exists
-        loadCart() {
-            const savedCart = JSON.parse(localStorage.getItem("cart"));
-            if (savedCart && Array.isArray(savedCart)) {
-                this.cart = savedCart;
-                console.log("Loaded cart from localStorage:", this.cart); // Debugging
-            } else {
-                console.log("No cart found in localStorage."); // Debugging
-            }
-        },
-
-        // Add item to the cart with a unique identifier
         addToCart(item) {
-            const uniqueId = `${item.id}-${item.material}-${item.size}-${item.color}`;
-
-            const existingItem = this.cart.find((cartItem) => cartItem.uniqueId === uniqueId);
+            const filling = item.selectedFilling || '';
+            const firstSide = item.selectedFirstSide || '';
+            const secondSide = item.selectedSecondSide || '';
+            const uniqueId = `${item.id}-${filling}-${firstSide}-${secondSide}`;
+            const existingItem = this.cart.find(cartItem => cartItem.uniqueId === uniqueId);
 
             if (existingItem) {
-                existingItem.quantity += 1; // Increase quantity if the item already exists in the cart
+                existingItem.quantity += 1;
             } else {
-                this.cart.push({ ...item, uniqueId, quantity: 1 }); // Add new item with quantity 1
+                const simplifiedItem = {
+                    id: item.id,
+                    name: item.name,
+                    imageUrl: item.imageUrl,
+                    price: item.price,
+                    quantity: 1,
+                    selectedFilling: filling,
+                    selectedFirstSide: firstSide,
+                    selectedSecondSide: secondSide,
+                    uniqueId: uniqueId,
+                };
+                this.cart.push(simplifiedItem);
             }
 
-            this.saveCart(); // Save cart to localStorage
-            console.log("Cart after adding item:", this.cart); // Debugging
-        },
-
-        // Remove item from the cart
-        removeFromCart(item) {
-            this.cart = this.cart.filter((cartItem) => cartItem.uniqueId !== item.uniqueId);
-            this.saveCart();
-            console.log("Cart after removing item:", this.cart); // Debugging
-        },
-
-        // Update item quantity
-        updateQuantity(item, quantity) {
-            const cartItem = this.cart.find((cartItem) => cartItem.uniqueId === item.uniqueId);
-            if (cartItem && quantity > 0) {
-                cartItem.quantity = quantity; // Update quantity if valid
-                this.saveCart(); // Save cart to localStorage
-                console.log("Updated cart:", this.cart); // Debugging
-            }
-        },
-
-        // Clear all items from the cart
-        clearCart() {
-            this.cart = [];
-            this.saveCart();
-            console.log("Cart cleared."); // Debugging
-        },
-
-        // Save the cart to localStorage
-        saveCart() {
             localStorage.setItem("cart", JSON.stringify(this.cart));
         },
+
+        loadCart() {
+            const savedCart = localStorage.getItem("cart");
+            if (savedCart) {
+                try {
+                    const parsedCart = JSON.parse(savedCart);
+                    if (Array.isArray(parsedCart)) {
+                        this.cart = parsedCart;
+                    } else {
+                        this.cart = [];
+                    }
+                } catch (e) {
+                    this.cart = [];
+                }
+            } else {
+                this.cart = [];
+            }
+        },
+
+        removeFromCart(item) {
+            this.cart = this.cart.filter(cartItem => cartItem.uniqueId !== item.uniqueId);
+            localStorage.setItem("cart", JSON.stringify(this.cart));
+        },
+
+        updateQuantity(item, quantity) {
+            const cartItem = this.cart.find(cartItem => cartItem.uniqueId === item.uniqueId);
+            if (cartItem && quantity > 0) {
+                cartItem.quantity = quantity;
+                localStorage.setItem("cart", JSON.stringify(this.cart));
+            }
+        },
+
+        clearCart() {
+            this.cart = [];
+            localStorage.removeItem("cart");
+        }
     },
 
     getters: {
-        // Get the total price of items in the cart
         totalPrice: (state) =>
             state.cart.reduce((total, item) => total + item.price * item.quantity, 0),
-
-        // Get the total quantity of items in the cart
-        totalQuantity: (state) =>
-            state.cart.reduce((total, item) => total + item.quantity, 0),
     },
+
+    persist: true,
 });
+

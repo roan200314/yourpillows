@@ -7,7 +7,10 @@
 
       <div v-else>
         <div class="space-y-4">
-          <CartItem v-for="(item, index) in cart" :key="index" :item="item" @remove="removeFromCart" />
+          <CartItem v-for="(item, index) in cart" :key="index" :item="item"
+                    @remove="removeFromCart"
+                    @increase="increaseQuantity"
+                    @decrease="decreaseQuantity" />
         </div>
 
         <div class="mt-4 text-gray-800 font-bold">
@@ -48,6 +51,16 @@ export default {
     removeFromCart(item) {
       const cartStore = useCartStore();
       cartStore.removeFromCart(item);
+    },
+    increaseQuantity(item) {
+      const cartStore = useCartStore();
+      cartStore.updateQuantity(item, item.quantity + 1); // Increase quantity by 1
+    },
+    decreaseQuantity(item) {
+      const cartStore = useCartStore();
+      if (item.quantity > 1) {
+        cartStore.updateQuantity(item, item.quantity - 1); // Decrease quantity by 1
+      }
     }
   }
 };

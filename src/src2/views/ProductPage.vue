@@ -1,6 +1,5 @@
 <template>
   <div v-if="product" class="bg-[#E5D9CF] min-h-screen font-sans p-4">
-
     <!-- Cart Modal -->
     <div v-if="cartVisible" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
       <div class="bg-white p-6 rounded-lg w-96">
@@ -90,15 +89,10 @@
           In winkelwagen
         </button>
 
-
         <!-- Message for customizable products -->
         <p v-if="product.category === 'customizable' && !(selectedFirstSide && selectedSecondSide && selectedFilling)" class="mt-2 text-red-500 text-sm">
           Selecteer alle opties om toe te voegen aan winkelwagen.
         </p>
-
-
-        <!-- Only show this message if the product is customizable -->
-        <p v-if="product.category === 'customizable'" class="mt-2 text-red-500 text-sm">Selecteer alle opties om toe te voegen aan winkelwagen.</p>
       </div>
     </div>
 
@@ -116,7 +110,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <div v-else class="min-h-screen flex items-center justify-center">
@@ -125,38 +118,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useCart } from '../composables/UseCart';
+import {ref} from 'vue';
+import {useCartStore} from '../stores/cart';
 import ProductSpecifications from '../components/ProductSpecifications.vue';
-import { GetProduct } from '../composables/GetProduct';
-import { useProductDetails } from '../composables/useProductDetails';
+import {GetProduct} from '../composables/GetProduct';
+import {useProductDetails} from '../composables/useProductDetails';
 
-const { product } = GetProduct();
-const { extraDescription, customerReviews, specifications } = useProductDetails();
-const { cart, addToCart, removeFromCart, totalPrice } = useCart();
+// Getting the product and other details
+const {product} = GetProduct();
+const {extraDescription, customerReviews, specifications} = useProductDetails();
 
-
-const addProductToCart = (product) => {
-  if (product.category === 'customizable') {
-    if (selectedFirstSide && selectedSecondSide && selectedFilling) {
-      const customizedProduct = {
-        ...product,
-        selectedFirstSide,
-        selectedSecondSide,
-        selectedFilling
-      };
-      addToCart(customizedProduct);
-    }
-  } else {
-    addToCart(product);
-  }
-};
-
-
-const getImageUrl = (imagePath) => {
-  if (!imagePath) return '../assets/images/default-placeholder.png';
-  return `/${imagePath}`;
-};
+// Pinia store for the cart
+const {cart, addToCart, removeFromCart, totalPrice} = useCartStore();
 
 const selectedFirstSide = ref('');
 const selectedSecondSide = ref('');
@@ -165,5 +138,28 @@ const cartVisible = ref(false);
 
 const toggleCart = () => {
   cartVisible.value = !cartVisible.value;
+};
+
+// Add the product to the cart
+const addProductToCart = (product) => {
+  if (product.category === 'customizable') {
+    // Check if all customization options are selected
+    if (selectedFirstSide.value && selectedSecondSide.value && selectedFilling.value) {
+      const customizedProduct = {
+        ...product,
+        selectedFirstSide: selectedFirstSide.value,
+        selectedSecondSide: selectedSecondSide.value,
+        selectedFilling: selectedFilling.value
+      };
+      addToCart(customizedProduct); // Add to cart
+    }
+  } else {
+    addToCart(product); // Add non-customizable product to cart
+  }
+};
+
+const getImageUrl = (imagePath) => {
+  if (!imagePath) return '../assets/images/default-placeholder.png';
+  return `/${imagePath}`;
 };
 </script>
