@@ -84,11 +84,12 @@
 
         <!-- "Add to Cart" Button -->
         <button
-            @click="addToCart(product)"
+            @click="addProductToCart(product)"
             class="mt-6 w-full bg-[#A3C7D6] text-white px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-[#89A5B6] transition duration-300 text-sm md:text-base"
             :disabled="product.category === 'customizable' && !(selectedFirstSide && selectedSecondSide && selectedFilling)">
           In winkelwagen
         </button>
+
 
         <!-- Message for customizable products -->
         <p v-if="product.category === 'customizable' && !(selectedFirstSide && selectedSecondSide && selectedFilling)" class="mt-2 text-red-500 text-sm">
@@ -133,6 +134,24 @@ import { useProductDetails } from '../composables/useProductDetails';
 const { product } = GetProduct();
 const { extraDescription, customerReviews, specifications } = useProductDetails();
 const { cart, addToCart, removeFromCart, totalPrice } = useCart();
+
+
+const addProductToCart = (product) => {
+  if (product.category === 'customizable') {
+    if (selectedFirstSide && selectedSecondSide && selectedFilling) {
+      const customizedProduct = {
+        ...product,
+        selectedFirstSide,
+        selectedSecondSide,
+        selectedFilling
+      };
+      addToCart(customizedProduct);
+    }
+  } else {
+    addToCart(product);
+  }
+};
+
 
 const getImageUrl = (imagePath) => {
   if (!imagePath) return '../assets/images/default-placeholder.png';
