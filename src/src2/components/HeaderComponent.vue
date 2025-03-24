@@ -15,7 +15,7 @@
       </button>
 
       <!-- Title -->
-      <router-link to="/" class="text-xl sm:text-2xl font-bold text-gray-800 sm:order-1 sm:mr-auto">YourPillows</router-link>
+      <router-link to="/Homepagina" class="text-xl sm:text-2xl font-bold text-gray-800 sm:order-1 sm:mr-auto">YourPillows</router-link>
 
       <!-- Navigation -->
       <NavigationMenu />

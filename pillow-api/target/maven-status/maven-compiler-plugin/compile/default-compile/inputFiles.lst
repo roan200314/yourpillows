@@ -8,7 +8,6 @@ C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Models\User.java
 C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Controllers\ProductController.java
 C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Services\ProductService.java
 C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Repositories\OrdersRepository.java
-C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Controllers\ImageUploadController.java
 C:\yourpillows\pillow-api\src\main\java\com\yourpillows\DTO\ProductDTO.java
 C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Repositories\ProductRepository.java
 C:\yourpillows\pillow-api\src\main\java\com\yourpillows\Mapper\UserMapper.java

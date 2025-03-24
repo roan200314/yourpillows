@@ -40,11 +40,25 @@ public class UserService {
         return "Registration successful!";
     }
 
+    public String loginUser(UserDTO loginDto) {
+        Optional<User> userOptional = userRepository.findByEmail(loginDto.getEmail());
 
-
-    public UserDTO getUserByEmail(String email) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        return userOptional.map(UserMapper.INSTANCE::toDto).orElse(null);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
+                // Hier zou je normaal een JWT of sessie-token maken
+                return "Succesvol ingelogd!"; // Of: return jwtToken;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
+
+//    public UserDTO getUserByEmail(String email) {
+//        Optional<User> userOptional = userRepository.findByEmail(email);
+//        return userOptional.map(UserMapper.INSTANCE::toDto).orElse(null);
+//    }
 
 }

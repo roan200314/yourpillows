@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/orders")
-@CrossOrigin(origins = "http://localhost:4173") // Adjust for frontend
+@CrossOrigin(origins = "http://localhost:8080") // Adjust for frontend
 public class OrdersController {
 
     @Autowired

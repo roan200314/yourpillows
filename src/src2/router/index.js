@@ -10,7 +10,7 @@ import CartPage from "../views/CartPage.vue";
 
 const routes = [
   {
-    path: '/',
+    path: '/Homepagina',
     name: 'Home',
     component: HomePageComponent
   },
