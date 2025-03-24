@@ -13,8 +13,8 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000") // ✅ Allow requests from frontend
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // ✅ Allow these HTTP methods
+                        .allowedOriginPatterns("https://*.example.com", "http://localhost:3000") // ✅ Allow requests from pattern and specific origin
+                        .allowedMethods("GET", "POST", "PUT", "DELETE") // ✅ Allow these HTTP methods
                         .allowedHeaders("*") // ✅ Allow all headers
                         .allowCredentials(true); // ✅ Allow cookies and authentication
             }

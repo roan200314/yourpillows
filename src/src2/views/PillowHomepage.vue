@@ -5,10 +5,10 @@ const { products } = useProducts();
 
 const getImageUrl = (imagePath) => {
   console.log("📸 Original imagePath:", imagePath);
-  if (!imagePath) return 'src/uploads/airKussen1.jpeg';
+  if (!imagePath) return '/uploads/airKussen1.jpeg';
 
   // Directly return the URL
-  const image = `/${imagePath}`;
+  const image = `uploads${imagePath}`;
 
   console.log(image);
   return image;
@@ -55,19 +55,46 @@ const getImageUrl = (imagePath) => {
         </div>
       </section>
 
-      <section class="py-8 sm:py-12 bg-[#A3C7D6] text-center text-white px-4">
-        <h3 class="text-2xl sm:text-3xl font-semibold">Waarom YourPillows?</h3>
-        <p class="mt-2">"Jouw kussen, jouw comfort. Slaap op maat met YourPillows."</p>
-        <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-4 sm:mt-6">
-          <div class="max-w-xs sm:max-w-sm text-center text-sm sm:text-lg">
-            <p>✔ Pas de vulling zelf aan</p>
-            <p>✔ Zijde, bamboe of satijn voor luxe comfort</p>
-            <p>✔ Vorm zich naar jouw lichaam</p>
-            <p>✔ Extra foam voor persoonlijk comfort</p>
-            <p>✔ Milieuvriendelijk en duurzaam geproduceerd</p>
-          </div>
+      <section class="py-12 bg-[#A3C7D6] px-4 text-white">
+        <div class="max-w-3xl mx-auto text-center">
+          <h3 class="text-3xl sm:text-4xl font-bold mb-4">Waarom YourPillows?</h3>
+          <p class="text-lg sm:text-xl mb-8">Jouw kussen, jouw comfort. Slaap op maat met YourPillows.</p>
+
+          <ul class="text-left max-w-md mx-auto space-y-4">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-white bg-purple-500 rounded-full p-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-base sm:text-lg">Pas de vulling zelf aan</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-white bg-purple-500 rounded-full p-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-base sm:text-lg">Zijde, bamboe of satijn voor luxe comfort</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-white bg-purple-500 rounded-full p-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-base sm:text-lg">Vormt zich naar jouw lichaam</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-white bg-purple-500 rounded-full p-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-base sm:text-lg">Extra foam voor persoonlijk comfort</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-white bg-purple-500 rounded-full p-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-base sm:text-lg">Milieuvriendelijk en duurzaam geproduceerd</span>
+            </li>
+          </ul>
         </div>
       </section>
+
     </main>
   </div>
 </template>

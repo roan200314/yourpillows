@@ -9,7 +9,7 @@ export function GetProduct() {
     const fetchProduct = async () => {
         try {
             console.log("🔍 Fetching product with ID:", route.params.id);
-            const response = await apiClient.get(`/api/products/${route.params.id}`);
+            const response = await apiClient.get(`/api/product/${route.params.id}`);
             product.value = response.data;
             console.log("✅ Product fetched successfully:", product.value);
         } catch (error) {

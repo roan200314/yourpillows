@@ -24,10 +24,10 @@ public class DataLoader {
                 System.out.println("🚀 Inserting products into database...");
 
                 List<Product> products = List.of(
-                        new Product("Zwangerschap kussen", "Lichtgewicht en ademend voor zacht comfort.", new BigDecimal("59.95"), 100, "/uploads/zwangerschapkussen1.jpg"),
-                        new Product("Vliegtuig kussen", "Comfort en duurzaamheid perfect gecombineerd.", new BigDecimal("59.95"), 100, "/uploads/vliegtuigkussen1.jpg"),
-                        new Product("Air kussen", "Luxe zijdezachte afwerking.", new BigDecimal("59.95"), 100, "/uploads/airKussen1.jpg"),
-                        new Product("Persoonlijk kussen", "Volledig aanpasbaar aan jouw voorkeuren.", new BigDecimal("59.95"), 100, "/uploads/Quiz_foto.png")
+                        new Product("Zwangerschap kussen", "Lichtgewicht en ademend voor zacht comfort.", new BigDecimal("53.95"), 100, "/uploads/zwangerschapkussen1.jpg", "pregnancy"),
+                        new Product("Vliegtuig kussen", "Comfort en duurzaamheid perfect gecombineerd.", new BigDecimal("50.95"), 100, "/uploads/vliegtuigkussen1.jpg", "neck"),
+                        new Product("Air kussen", "Luxe zijdezachte afwerking.", new BigDecimal("52.95"), 100, "/airKussen1.jpg", "air"),
+                        new Product("Persoonlijk kussen", "Volledig aanpasbaar aan jouw voorkeuren.", new BigDecimal("59.95"), 100, "/Quiz_foto.png", "customizable")
                 );
 
                 productRepository.saveAll(products);

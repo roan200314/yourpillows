@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class RegisterController {
 
     @Autowired
@@ -17,6 +17,12 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String register(@Valid @RequestBody UserDTO userDto) {
-        return userService.registerUser(userDto);
+        try {
+            return userService.registerUser(userDto);
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for better debugging
+            return "Error occurred while registering.";
+        }
     }
+
 }

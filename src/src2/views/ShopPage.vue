@@ -62,7 +62,7 @@ const getImageUrl = (imagePath) => {
   if (!imagePath) return 'src/uploads/airKussen1.jpeg';
 
   // Directly return the URL
-  const image = `/${imagePath}`;
+  const image = `${imagePath}`;
 
   console.log(image);
   return image;

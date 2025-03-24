@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "products")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,7 +27,7 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(nullable = false)
+    @Column()
     private String category; // Example values: "customizable", "neckpillow", "airplane"
 
     @Column(nullable = false)
@@ -41,10 +40,11 @@ public class Product {
     private String imageUrl;
 
     // ✅ Add a constructor that matches DataLoader
-    public Product(String name, String description, BigDecimal price, int stockQuantity, String imageUrl) {
+    public Product(String name, String description, BigDecimal price, int stockQuantity, String imageUrl, String category) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category = category;
         this.stockQuantity = stockQuantity;
         this.imageUrl = imageUrl;
         this.createdAt = LocalDateTime.now();

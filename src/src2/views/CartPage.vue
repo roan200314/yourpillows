@@ -1,59 +1,176 @@
 <template>
-  <div class="checkout">
-    <h2>Afrekenen</h2>
+  <div class="max-w-7xl mx-auto p-5 flex flex-col lg:flex-row gap-10">
+    <!-- Linkerkant: Checkout Form -->
+    <div class="w-full lg:w-2/3">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Afrekenen</h2>
 
-    <form @submit.prevent="submitOrder">
-      <h3>Contact</h3>
-      <input type="email" v-model="order.email" value="roan_alhelly@hotmail.com" placeholder="E-mail" required />
-      <label>
-        <input type="checkbox" v-model="order.newsletter" />
-        Stuur mij een e-mail met nieuws en aanbiedingen
-      </label>
+      <form @submit.prevent="submitOrder" class="space-y-6">
+        <!-- Contactgegevens -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">Contact</h3>
+          <input
+              type="email"
+              v-model="order.email"
+              placeholder="E-mail"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
 
-      <h3>Bezorging</h3>
-      <select v-model="order.country" required>
-        <option value="Nederland">Nederland</option>
-      </select>
+          <label class="flex items-center mt-3 text-sm text-gray-600">
+            <input
+                type="checkbox"
+                v-model="order.newsletter"
+                class="mr-2 rounded text-blue-600 focus:ring-blue-400"
+            />
+            Stuur mij een e-mail met nieuws en aanbiedingen
+          </label>
+        </div>
 
-      <div class="name-fields">
-        <input type="text" v-model="order.firstName" value="Roan" placeholder="Voornaam" required />
-        <input type="text" v-model="order.lastName" value="al Helly" placeholder="Achternaam" required />
+        <!-- Bezorggegevens -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">Bezorging</h3>
+          <select
+              v-model="order.country"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          >
+            <option value="Nederland">Nederland</option>
+          </select>
+
+          <div class="flex flex-col sm:flex-row sm:space-x-4 mt-4">
+            <input
+                type="text"
+                v-model="order.firstName"
+                placeholder="Voornaam"
+                required
+                class="w-full mb-3 sm:mb-0 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+            <input
+                type="text"
+                v-model="order.lastName"
+                placeholder="Achternaam"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+          </div>
+
+          <input
+              type="text"
+              v-model="order.company"
+              placeholder="Bedrijf (optioneel)"
+              class="w-full mt-3 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+
+          <input
+              type="text"
+              v-model="order.street"
+              placeholder="Straatnaam"
+              required
+              class="w-full mt-3 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+
+          <input
+              type="text"
+              v-model="order.houseNumber"
+              placeholder="Huisnummer + toevoeging"
+              required
+              class="w-full mt-3 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+
+          <div class="flex flex-col sm:flex-row sm:space-x-4 mt-4">
+            <input
+                type="text"
+                v-model="order.postalcode"
+                placeholder="Postcode"
+                required
+                class="w-full mb-3 sm:mb-0 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+            <input
+                type="text"
+                v-model="order.city"
+                placeholder="Stad"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+          </div>
+
+          <input
+              type="tel"
+              v-model="order.phone"
+              placeholder="Telefoonnummer (optioneel)"
+              class="w-full mt-3 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+
+          <label class="flex items-center mt-3 text-sm text-gray-600">
+            <input
+                type="checkbox"
+                v-model="order.smsOffers"
+                class="mr-2 rounded text-blue-600 focus:ring-blue-400"
+            />
+            Stuur mij een sms met nieuws en aanbiedingen
+          </label>
+        </div>
+
+        <!-- Bestelling plaatsen -->
+        <button
+            type="submit"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md transition-colors"
+        >
+          Bestelling plaatsen
+        </button>
+
+        <!-- Berichten -->
+        <p
+            v-if="successMessage"
+            class="mt-5 text-green-600 font-medium text-center"
+        >
+          {{ successMessage }}
+        </p>
+        <p
+            v-if="errorMessage"
+            class="mt-5 text-red-600 font-medium text-center"
+        >
+          {{ errorMessage }}
+        </p>
+      </form>
+    </div>
+
+    <!-- Rechterkant: Overzicht producten -->
+    <div class="w-full lg:w-1/3 bg-gray-50 p-6 rounded-xl border border-gray-200 h-fit">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Jouw bestelling</h3>
+      <div v-for="item in cartStore.items" :key="item.id" class="flex justify-between items-center mb-4">
+        <div>
+          <p class="font-medium text-gray-800">{{ item.name }}</p>
+          <p class="text-sm text-gray-500">{{ item.quantity }} x €{{ item.price.toFixed(2) }}</p>
+        </div>
+        <img :src="item.image" alt="Product afbeelding" class="w-16 h-16 object-cover rounded-md" />
       </div>
 
-      <input type="text" v-model="order.company" value="" placeholder="Bedrijf (optioneel)" />
-
-      <input type="text" v-model="order.street" value="Mastbos" placeholder="Straatnaam" required />
-      <input type="text" v-model="order.houseNumber" value="421" placeholder="Huisnummer + toevoeging" required />
-
-      <div class="address-fields">
-        <input type="text" v-model="order.postalcode" value="2134NL" placeholder="Postcode" required />
-        <input type="text" v-model="order.city" value="Hoofddorp" placeholder="Stad" required />
+      <div class="border-t border-gray-200 pt-4 mt-4">
+        <p class="flex justify-between text-gray-700 mb-2">
+          <span>Subtotaal</span>
+          <span>€{{ cartStore.totalPrice.toFixed(2) }}</span>
+        </p>
+        <p class="flex justify-between text-gray-700 mb-4">
+          <span>Verzending</span>
+          <span>Gratis</span>
+        </p>
+        <p class="flex justify-between font-bold text-gray-900 text-lg">
+          <span>Totaal</span>
+          <span>€{{ cartStore.totalPrice.toFixed(2) }}</span>
+        </p>
       </div>
-
-      <input type="tel" v-model="order.phone" value="0612945625" placeholder="Telefoon (optioneel)" />
-
-      <label>
-        <input type="checkbox" v-model="order.smsOffers" />
-        Stuur mij een sms met nieuws en aanbiedingen
-      </label>
-
-      <h3>Samenvatting</h3>
-      <p>Totaal: €{{ cartStore.totalPrice }}</p>
-
-      <button type="submit" class="checkout-btn">Bestelling plaatsen</button>
-    </form>
-
-    <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
-    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useCartStore } from "../stores/cart";
-import apiClient from "../api/apiClient"; // Gebruik de axios client
+import apiClient from "../api/apiClient";
 
 const cartStore = useCartStore();
+
 const successMessage = ref("");
 const errorMessage = ref("");
 
@@ -70,101 +187,26 @@ const order = ref({
   city: "",
   phone: "",
   smsOffers: false,
-  totalPrice: cartStore.totalPrice
+  totalPrice: cartStore.totalPrice,
 });
 
 const submitOrder = async () => {
   try {
+    order.value.totalPrice = cartStore.totalPrice;
+
     const response = await apiClient.post("/api/orders/create", order.value);
 
-    if (response.data && response.data.orderId) {
+    if (response.data?.orderId) {
       successMessage.value = `Je bestelling (#${response.data.orderId}) is succesvol geplaatst!`;
+      errorMessage.value = "";
+      cartStore.clearCart();
     } else {
-      successMessage.value = "De bestelling is geplaatst, maar het ordernummer is niet beschikbaar.";
+      successMessage.value = "Bestelling geplaatst, maar ordernummer ontbreekt.";
     }
-
-    cartStore.clearCart(); // Leeg de winkelwagen na bestelling
   } catch (error) {
     console.error("Fout bij het plaatsen van de bestelling:", error);
     errorMessage.value = "Er is iets misgegaan, probeer het opnieuw.";
+    successMessage.value = "";
   }
 };
 </script>
-
-<style scoped>
-.checkout {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-}
-
-input, select, button {
-  width: 100%;
-  margin: 8px 0;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.name-fields,
-.address-fields {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.name-fields input,
-.address-fields input {
-  width: 48%;
-}
-
-.checkout-btn {
-  background-color: #A3C7D6;
-  color: white;
-  border: none;
-  padding: 14px;
-  cursor: pointer;
-}
-
-.checkout-btn:hover {
-  background-color: #8DAEBF;
-}
-
-.success-message, .error-message {
-  margin-top: 15px;
-  color: green;
-  font-weight: bold;
-}
-
-.error-message {
-  color: red;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .name-fields,
-  .address-fields {
-    flex-direction: column;
-  }
-
-  .name-fields input,
-  .address-fields input {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .checkout {
-    padding: 10px;
-    max-width: 100%;
-  }
-
-  input, select, button {
-    padding: 10px;
-  }
-
-  .checkout-btn {
-    font-size: 16px;
-  }
-}
-</style>

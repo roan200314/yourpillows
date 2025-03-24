@@ -24,12 +24,13 @@ public class UserService {
         // Check if email already exists
         Optional<User> existingUser = userRepository.findByEmail(userDto.getEmail());
         if (existingUser.isPresent()) {
-            return "Error: Email is already in use!";
+            return "Error: Email is al in gebruik, log in";
         }
 
         // Convert DTO to Entity
         User user = UserMapper.INSTANCE.toEntity(userDto);
 
+        user.setName(userDto.getName());
         // Hash het wachtwoord vóór opslag
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 

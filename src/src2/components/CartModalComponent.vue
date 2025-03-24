@@ -1,16 +1,28 @@
 <template>
   <div v-if="cartVisible" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-    <div class="bg-white p-6 rounded-lg w-96 max-w-lg">
+    <div class="bg-white w-fit p-6 rounded-lg max-w-lg">
       <h3 class="text-xl font-semibold text-gray-800 mb-4">Jouw winkelwagen</h3>
 
-      <div v-if="cart.length === 0" class="mt-4 text-gray-500">Uw winkelwagen is leeg</div>
+      <div v-if="cart.length === 0" class="mt-4 text-gray-500 text-center">
+        Uw winkelwagen is leeg
+        <div class="mt-6">
+          <button
+              @click="$emit('closeCart')"
+              class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">
+            Sluit
+          </button>
+        </div>
+      </div>
 
       <div v-else>
         <div class="space-y-4">
-          <CartItem v-for="(item, index) in cart" :key="index" :item="item"
-                    @remove="removeFromCart"
-                    @increase="increaseQuantity"
-                    @decrease="decreaseQuantity" />
+          <CartItem
+              v-for="(item, index) in cart"
+              :key="index"
+              :item="item"
+              @remove="removeFromCart"
+              @increase="increaseQuantity"
+              @decrease="decreaseQuantity" />
         </div>
 
         <div class="mt-4 text-gray-800 font-bold">
@@ -18,8 +30,16 @@
         </div>
 
         <div class="flex space-x-4 mt-4">
-          <button @click="$emit('closeCart')" class="w-full bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Sluit</button>
-          <router-link @click="$emit('closeCart')" to="/Checkout" class="w-full bg-[#A3C7D6] text-white px-4 py-2 rounded-lg hover:bg-[#89A5B6] flex justify-center">
+          <button
+              @click="$emit('closeCart')"
+              class="w-full bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">
+            Sluit
+          </button>
+
+          <router-link
+              @click="$emit('closeCart')"
+              to="/Checkout"
+              class="w-full bg-[#A3C7D6] text-white px-4 py-2 rounded-lg hover:bg-[#89A5B6] transition duration-300 flex justify-center">
             Naar afrekenen
           </router-link>
         </div>
@@ -27,6 +47,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import { useCartStore } from '../stores/cart';
