@@ -12,12 +12,13 @@ com\yourpillows\Config\CorsConfig$1.class
 com\yourpillows\Models\Orders.class
 com\yourpillows\Mapper\UserMapperImpl.class
 com\yourpillows\Services\UserService.class
+com\yourpillows\Controllers\LoginController.class
 com\yourpillows\Application.class
-com\yourpillows\Controllers\ImageUploadController.class
 com\yourpillows\DTO\ProductDTO.class
 com\yourpillows\DTO\OrdersDTO.class
 com\yourpillows\Mapper\UserMapper.class
 com\yourpillows\Repositories\ProductRepository.class
 com\yourpillows\Repositories\UserRepository.class
+com\yourpillows\Security\JwtUtil.class
 com\yourpillows\Services\OrdersService.class
 com\yourpillows\Models\User.class

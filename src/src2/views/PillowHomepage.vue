@@ -5,10 +5,10 @@ const { products } = useProducts();
 
 const getImageUrl = (imagePath) => {
   console.log("📸 Original imagePath:", imagePath);
-  if (!imagePath) return '/uploads/airKussen1.jpeg';
+  if (!imagePath) return '../src/uploads/airKussen1.jpeg';
 
   // Directly return the URL
-  const image = `uploads${imagePath}`;
+  const image = `src/uploads${imagePath}`;
 
   console.log(image);
   return image;

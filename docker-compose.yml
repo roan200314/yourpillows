@@ -1,13 +1,18 @@
-version: '3.8'
+version: "3.8"
 
 services:
   backend:
-    build: ./pillow-api
+    build:
+      context: ./pillow-api
     container_name: yourpillows-backend
+    ports:
+      - "8081:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://yourpillows-db:3306/yourpillows
+      - SPRING_DATASOURCE_URL=jdbc:mysql://yourpillows-db:3306/yourpillows?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - SPRING_DATASOURCE_PASSWORD=Roan1972!
+      - SPRING_FLYWAY_ENABLED=true
+      - SPRING_FLYWAY_BASELINE_ON_MIGRATE=true
     depends_on:
       db:
         condition: service_healthy
@@ -15,7 +20,8 @@ services:
       - yourpillows-network
 
   frontend:
-    build: ./src
+    build:
+      context: ./src
     container_name: yourpillows-frontend
     ports:
       - "3000:80"
@@ -24,21 +30,22 @@ services:
     networks:
       - yourpillows-network
 
-  db:  # <<< Dit moet binnen 'services:' staan!
+  db:
     image: mysql:8.0
     container_name: yourpillows-db
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: Roan1972!
       MYSQL_DATABASE: yourpillows
     ports:
-      - "3307:3306"
+      - "3307:3306"  # Map host 3307 to container 3306
     networks:
       - yourpillows-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
 networks:
   yourpillows-network:

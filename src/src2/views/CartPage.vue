@@ -168,6 +168,7 @@
 import { ref } from "vue";
 import { useCartStore } from "../stores/cart";
 import apiClient from "../api/apiClient";
+import {Stripe} from "stripe";
 
 const cartStore = useCartStore();
 
@@ -194,19 +195,26 @@ const submitOrder = async () => {
   try {
     order.value.totalPrice = cartStore.totalPrice;
 
-    const response = await apiClient.post("/api/orders/create", order.value);
+    // Stuur order data naar je backend
+    const response = await apiClient.post("/api/checkout/create-session", order.value);
 
-    if (response.data?.orderId) {
-      successMessage.value = `Je bestelling (#${response.data.orderId}) is succesvol geplaatst!`;
-      errorMessage.value = "";
-      cartStore.clearCart();
+    // Controleer of er een URL in de response zit
+    if (response.data?.url) {
+      // Gebruik Stripe.js om de gebruiker naar de Stripe Checkout-pagina te sturen
+      const stripe = Stripe('pk_test_51R7MptGaO1hcl0VsuMEkYkZkboFJtddADrjnTWv8dxlj4ZfCN2h9q9TonSpemxPZU1P2M9FZQrVfz4isg719Mi4d00FAOOGTap'); // Jouw public key
+      await stripe.redirectToCheckout({ sessionId: response.data.url });
     } else {
-      successMessage.value = "Bestelling geplaatst, maar ordernummer ontbreekt.";
+      successMessage.value = "Bestelling geplaatst, maar de betaalpagina kon niet worden geladen.";
     }
+
+    // Clear the cart after successful order submission
+    cartStore.clearCart();
   } catch (error) {
     console.error("Fout bij het plaatsen van de bestelling:", error);
     errorMessage.value = "Er is iets misgegaan, probeer het opnieuw.";
     successMessage.value = "";
   }
 };
+
+
 </script>
